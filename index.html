@@ -1,21 +1,571 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Welcome to my website</h1>
-    <dev>
-        <p>This is a sample website created using HTML.
-            
-        </p>
-    </dev>
-    <dev>
-        <button onclick="alert('Hello, world!')">Click me</button>
-    </dev>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Programmer Portfolio</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg0: #070a14;
+        --bg1: #0b1733;
+        --text: rgba(255, 255, 255, 0.88);
+        --muted: rgba(255, 255, 255, 0.64);
+        --glass: rgba(255, 255, 255, 0.06);
+        --glass-strong: rgba(255, 255, 255, 0.09);
+        --border: rgba(255, 255, 255, 0.14);
+        --border-soft: rgba(255, 255, 255, 0.1);
+        --shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+        --accent: #22c55e;
+        --accent2: #a855f7;
+        --focus: rgba(168, 85, 247, 0.55);
+      }
 
-</body>
-    
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        height: 200vh;
+        height: 200dvh;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        color: var(--text);
+        background:
+          radial-gradient(1200px 700px at 10% 0%, rgba(168, 85, 247, 0.22), transparent 60%),
+          radial-gradient(1000px 700px at 95% 15%, rgba(34, 197, 94, 0.14), transparent 55%),
+          radial-gradient(900px 800px at 55% 105%, rgba(99, 102, 241, 0.14), transparent 62%),
+          linear-gradient(180deg, var(--bg0), var(--bg1));
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 3px;
+        border-radius: 999px;
+      }
+
+      .ambient {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .ambient::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        background:
+          radial-gradient(1200px 700px at 50% 50%, rgba(255, 255, 255, 0.04), transparent 70%),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.02) 0px,
+            rgba(255, 255, 255, 0.02) 1px,
+            transparent 1px,
+            transparent 10px
+          );
+        opacity: 0.35;
+        mix-blend-mode: overlay;
+      }
+
+      .orb {
+        position: absolute;
+        width: 320px;
+        height: 320px;
+        border-radius: 9999px;
+        filter: blur(2px);
+        opacity: 0.72;
+        transform: translate3d(0, 0, 0);
+        animation: orbDrift 18s ease-in-out infinite;
+      }
+
+      .orb--a {
+        top: -140px;
+        left: -160px;
+        width: 420px;
+        height: 420px;
+        background: radial-gradient(circle at 30% 30%, rgba(168, 85, 247, 0.58), transparent 65%);
+        animation-duration: 22s;
+      }
+
+      .orb--b {
+        top: 12%;
+        right: -180px;
+        width: 460px;
+        height: 460px;
+        background: radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.5), transparent 68%);
+        animation-duration: 26s;
+        animation-delay: -6s;
+      }
+
+      .orb--c {
+        bottom: -220px;
+        left: 34%;
+        width: 520px;
+        height: 520px;
+        background: radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.55), transparent 68%);
+        animation-duration: 30s;
+        animation-delay: -12s;
+      }
+
+      .spark {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.55);
+        box-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
+        opacity: 0.65;
+        animation: twinkle 3.2s ease-in-out infinite;
+      }
+
+      .spark--1 {
+        top: 18%;
+        left: 12%;
+        animation-delay: -0.3s;
+      }
+      .spark--2 {
+        top: 32%;
+        left: 82%;
+        animation-delay: -1.2s;
+      }
+      .spark--3 {
+        top: 72%;
+        left: 18%;
+        animation-delay: -2.0s;
+      }
+      .spark--4 {
+        top: 66%;
+        left: 88%;
+        animation-delay: -0.9s;
+      }
+      .spark--5 {
+        top: 8%;
+        left: 56%;
+        animation-delay: -1.8s;
+      }
+      .spark--6 {
+        top: 88%;
+        left: 62%;
+        animation-delay: -2.4s;
+      }
+
+      @keyframes orbDrift {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+        50% {
+          transform: translate3d(48px, 36px, 0) scale(1.06);
+        }
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) scale(1);
+          opacity: 0.55;
+        }
+        50% {
+          transform: translate3d(0, -10px, 0) scale(1.25);
+          opacity: 0.9;
+        }
+      }
+
+      .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 4;
+        padding: 16px clamp(16px, 5vw, 28px);
+      }
+
+      .topbar__inner {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 10px 10px;
+        border-radius: 9999px;
+        background: rgba(0, 0, 0, 0.18);
+        border: 1px solid var(--border-soft);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      @supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+        .topbar__inner {
+          -webkit-backdrop-filter: blur(10px) saturate(140%);
+          backdrop-filter: blur(10px) saturate(140%);
+          background: rgba(255, 255, 255, 0.04);
+        }
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 132px;
+        padding: 10px 16px;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border-soft);
+        color: var(--text);
+        transition: transform 140ms ease, background 160ms ease, border-color 160ms ease;
+        user-select: none;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.18);
+      }
+
+      .btn:active {
+        transform: translateY(0px);
+      }
+
+      .panel {
+        position: fixed;
+        inset: 0;
+        z-index: 2;
+        display: grid;
+        place-items: center;
+        padding: clamp(20px, 6vw, 80px);
+        opacity: 0;
+        transform: translate3d(0, 18px, 0);
+        pointer-events: none;
+        transition: opacity 260ms ease, transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .panel.is-visible {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        pointer-events: auto;
+      }
+
+      .panel.is-fading-out {
+        opacity: 0;
+        transform: translate3d(0, -18px, 0);
+        pointer-events: none;
+      }
+
+      .card {
+        width: min(900px, 100%);
+        padding: clamp(18px, 3vw, 42px);
+        border-radius: 26px;
+        background: var(--glass);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+
+      .panel[data-panel="1"] .card {
+        max-height: calc(100vh - clamp(40px, 12vw, 160px));
+        max-height: calc(100dvh - clamp(40px, 12vw, 160px));
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .panel[data-panel="1"] .bio {
+        white-space: pre-line;
+      }
+
+      @supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+        .card {
+          -webkit-backdrop-filter: blur(10px) saturate(140%);
+          backdrop-filter: blur(10px) saturate(140%);
+          background: var(--glass-strong);
+        }
+      }
+
+      .bio {
+        margin: 0;
+        font-size: clamp(1.05rem, 1.2vw + 0.85rem, 1.55rem);
+        line-height: 1.65;
+        letter-spacing: 0.01em;
+        white-space: normal;
+      }
+
+      .bio:empty {
+        min-height: clamp(140px, 22vh, 280px);
+        border-radius: 18px;
+        border: 1px dashed rgba(255, 255, 255, 0.16);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+      }
+
+      .footer-hint {
+        position: fixed;
+        left: 50%;
+        bottom: 18px;
+        transform: translateX(-50%);
+        z-index: 4;
+        width: 28px;
+        height: 46px;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        opacity: 0.85;
+        pointer-events: none;
+      }
+
+      .footer-hint::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 12px;
+        width: 4px;
+        height: 4px;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.75);
+        transform: translateX(-50%);
+        animation: scrollDot 1.5s ease-in-out infinite;
+      }
+
+      @keyframes scrollDot {
+        0% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(0);
+        }
+        30% {
+          opacity: 1;
+        }
+        70% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(16px);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(16px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .orb,
+        .spark,
+        .footer-hint::before {
+          animation: none !important;
+        }
+
+        .panel {
+          transition: none !important;
+        }
+
+        .btn {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ambient" aria-hidden="true">
+      <div class="orb orb--a"></div>
+      <div class="orb orb--b"></div>
+      <div class="orb orb--c"></div>
+      <div class="spark spark--1"></div>
+      <div class="spark spark--2"></div>
+      <div class="spark spark--3"></div>
+      <div class="spark spark--4"></div>
+      <div class="spark spark--5"></div>
+      <div class="spark spark--6"></div>
+    </div>
+
+    <header class="topbar">
+      <div class="topbar__inner">
+        
+        <a class="btn" href="https://github.com/noahmiedemaTech/25863_Decode.git" aria-label="FTC Code">FTC Code</a>
+        <a class="btn" href="https://github.com/noahmiedemaTech/codrone-edu.git" aria-label="Blank link 2">Codrone Code</a>
+        <a class="btn" href="#" aria-label="Blank link 3">To be filled</a>
+        <a class="btn" href="#" aria-label="Blank link 4">To be filled</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel is-visible" data-panel="0" aria-hidden="false">
+        <div class="card">
+          <p class="bio" id="paragraph-1">
+            I am a motivated and technically minded individual with hands-on experience in drones, radio communication, and practical problem-solving. I hold a FAA Part 107 Remote Pilot Certificate and a ham radio license, showing knowledge of aviation rules, safe drone operation, and wireless communication systems. My interests include technology, engineering, outdoor systems, and building real-world skills that combine precision, responsibility, and adaptability.
+            </p>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="1" aria-hidden="true">
+        <div class="card">
+          <p class="bio" id="paragraph-2">Noah Miedema:
+Remote Pilot (Part 107) | Amateur Radio Operator | Technology Specialist:
+I am a technically driven individual with a strong focus on unmanned aerial systems (UAS), radio communications, and advanced aerospace technologies. I hold an FAA Part 107 Remote Pilot Certificate and an FCC Amateur Radio License, demonstrating knowledge of aviation regulations, airspace management, and RF communication systems.
+I have gained exposure to advanced drone and aerospace concepts through work associated with Johns Hopkins University, including involvement related to the Dragonfly mission—a cutting-edge rotorcraft designed for extraterrestrial exploration.
+Certifications
+FAA Part 107 Remote Pilot Certificate
+Commercial UAS operation, airspace, weather, and safety procedures
+FCC Amateur Radio License
+RF fundamentals, propagation, and communication protocols
+Core Competencies
+UAS operation and flight planning
+Airspace analysis and safety management
+Radio communication and RF systems
+Technical troubleshooting and system configuration
+Regulatory compliance
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer-hint" aria-hidden="true"></div>
+
+    <script>
+      (() => {
+        const panels = Array.from(document.querySelectorAll(".panel"));
+        if (panels.length < 2) return;
+
+        const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
+        let currentPanelIndex = panels.findIndex((p) => p.classList.contains("is-visible"));
+        if (currentPanelIndex < 0) currentPanelIndex = 0;
+
+        let isTransitioning = false;
+        let queuedPanelIndex = null;
+
+        const clamp01 = (value) => Math.max(0, Math.min(1, value));
+        const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const scrollProgress = () => clamp01(window.scrollY / maxScroll());
+
+        const setPanel = (index) => {
+          panels.forEach((panel, idx) => {
+            const isVisible = idx === index;
+            panel.classList.toggle("is-visible", isVisible);
+            panel.classList.remove("is-fading-out");
+            panel.setAttribute("aria-hidden", String(!isVisible));
+          });
+          currentPanelIndex = index;
+        };
+
+        const transitionToPanel = (nextIndex) => {
+          if (nextIndex === currentPanelIndex) return;
+          if (prefersReducedMotion) {
+            setPanel(nextIndex);
+            return;
+          }
+
+          if (isTransitioning) {
+            queuedPanelIndex = nextIndex;
+            return;
+          }
+
+          isTransitioning = true;
+          queuedPanelIndex = null;
+
+          const fromPanel = panels[currentPanelIndex];
+          const toPanel = panels[nextIndex];
+
+          const onFadeOutEnd = (event) => {
+            if (event.target !== fromPanel) return;
+            if (event.propertyName !== "opacity") return;
+            fromPanel.removeEventListener("transitionend", onFadeOutEnd);
+
+            fromPanel.classList.remove("is-visible");
+            fromPanel.classList.remove("is-fading-out");
+            fromPanel.setAttribute("aria-hidden", "true");
+
+            requestAnimationFrame(() => {
+              toPanel.classList.add("is-visible");
+              toPanel.setAttribute("aria-hidden", "false");
+
+              currentPanelIndex = nextIndex;
+              isTransitioning = false;
+
+              const desired = queuedPanelIndex;
+              queuedPanelIndex = null;
+              if (typeof desired === "number" && desired !== currentPanelIndex) transitionToPanel(desired);
+            });
+          };
+
+          toPanel.classList.remove("is-visible");
+          toPanel.classList.remove("is-fading-out");
+          toPanel.setAttribute("aria-hidden", "true");
+
+          fromPanel.addEventListener("transitionend", onFadeOutEnd);
+          fromPanel.classList.add("is-fading-out");
+        };
+
+        const SNAP_THRESHOLD = 0.5;
+        const SNAP_EPS_PX = 2;
+        let ignoreNextScrollSettle = false;
+
+        const pickDesiredPanelIndex = () => (scrollProgress() >= SNAP_THRESHOLD ? 1 : 0);
+
+        const autoCompleteScroll = () => {
+          if (ignoreNextScrollSettle) {
+            ignoreNextScrollSettle = false;
+            return;
+          }
+
+          const yMax = maxScroll();
+          const p = scrollProgress();
+          const targetIndex = p >= SNAP_THRESHOLD ? 1 : 0;
+          const targetY = targetIndex === 1 ? yMax : 0;
+
+          if (Math.abs(window.scrollY - targetY) <= SNAP_EPS_PX) return;
+
+          ignoreNextScrollSettle = true;
+          transitionToPanel(targetIndex);
+          window.scrollTo({
+            top: targetY,
+            behavior: prefersReducedMotion ? "auto" : "smooth",
+          });
+        };
+
+        let rafId = 0;
+        const onScroll = () => {
+          if (rafId) return;
+          rafId = requestAnimationFrame(() => {
+            rafId = 0;
+            transitionToPanel(pickDesiredPanelIndex());
+          });
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll, { passive: true });
+        onScroll();
+
+        if ("onscrollend" in window) {
+          document.addEventListener("scrollend", autoCompleteScroll);
+        } else {
+          let settleTimer = 0;
+          window.addEventListener(
+            "scroll",
+            () => {
+              clearTimeout(settleTimer);
+              settleTimer = window.setTimeout(autoCompleteScroll, 90);
+            },
+            { passive: true }
+          );
+        }
+
+        document.addEventListener(
+          "click",
+          (event) => {
+            const a = event.target.closest?.("a[href]");
+            if (!a) return;
+            if (a.getAttribute("href") === "#") event.preventDefault();
+          },
+          { capture: true }
+        );
+      })();
+    </script>
+  </body>
 </html>
